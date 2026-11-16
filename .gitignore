@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+bun.lock
+bun.lockb
+
+# Next.js & Build Artifacts
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Environment & Secrets (NEVER commit credentials)
+.env
+.env*
+!.env.example
+*.pem
+*.key
+*service-account*.json
+firebase-adminsdk*.json
+
+# Python / GIS Service (future phases)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Logs & OS Artifacts
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE & Deployment Temp
+.vercel/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+

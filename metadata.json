@@ -1,0 +1,6 @@
+{
+  "name": "GGR-ICMS — Green Garden Residence",
+  "description": "Integrated Community Management System untuk RT 06 RW 01, Perum Green Garden Residence, Desa Cipicung, Kecamatan Banyuresmi, Kabupaten Garut.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

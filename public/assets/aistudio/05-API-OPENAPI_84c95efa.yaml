@@ -1,0 +1,165 @@
+openapi: 3.1.0
+info:
+  title: GGR-ICMS API
+  version: 1.0.0
+  description: Starter contract; detail payload dan authorization wajib diselaraskan dengan implementasi.
+servers:
+  - url: https://CHANGE_ME.example/api/v1
+security:
+  - FirebaseBearer: []
+paths:
+  /health:
+    get:
+      security: []
+      summary: Health check
+      responses:
+        '200':
+          description: Service healthy
+  /me:
+    get:
+      summary: Get authenticated user profile
+      responses:
+        '200':
+          description: Profile returned
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /service-requests:
+    get:
+      summary: List requests visible to caller
+      parameters:
+        - in: query
+          name: cursor
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        '200':
+          description: Request page
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      summary: Create service request
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string, minLength: 16, maxLength: 128 }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [serviceType, subject]
+              properties:
+                serviceType: { type: string, minLength: 1, maxLength: 80 }
+                subject: { type: string, minLength: 3, maxLength: 160 }
+                description: { type: string, maxLength: 4000 }
+      responses:
+        '201': { description: Created }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '409': { description: Idempotency conflict }
+  /service-requests/{requestId}:
+    get:
+      summary: Get request subject to ownership/role policy
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+      responses:
+        '200': { description: Request returned }
+        '404': { description: Not found or not visible }
+  /complaints:
+    post:
+      summary: Submit complaint
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [category, description]
+              properties:
+                category: { type: string }
+                description: { type: string, minLength: 10, maxLength: 5000 }
+                locationFeatureId: { type: string }
+      responses:
+        '201': { description: Complaint submitted }
+  /finance/transactions:
+    post:
+      summary: Create finance transaction; restricted to authorized finance role
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, amountIdr, occurredAt, description]
+              properties:
+                type: { type: string, enum: [receipt, expense, reversal] }
+                amountIdr: { type: integer, minimum: 1 }
+                occurredAt: { type: string, format: date-time }
+                description: { type: string, maxLength: 500 }
+                reversesTransactionId: { type: string }
+      responses:
+        '201': { description: Transaction created }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /documents/{documentId}/download:
+    post:
+      summary: Authorize and issue short-lived document download
+      parameters:
+        - in: path
+          name: documentId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Authorized download metadata or short-lived URL }
+        '403': { $ref: '#/components/responses/Forbidden' }
+  /gis/features:
+    get:
+      summary: Query approved GIS features
+      security:
+        - FirebaseBearer: []
+      parameters:
+        - in: query
+          name: bbox
+          schema:
+            type: string
+            description: minLon,minLat,maxLon,maxLat in EPSG:4326
+        - in: query
+          name: layer
+          schema: { type: string }
+      responses:
+        '200':
+          description: GeoJSON FeatureCollection with authorized properties
+components:
+  securitySchemes:
+    FirebaseBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: Firebase ID Token
+  parameters:
+    RequestId:
+      in: path
+      name: requestId
+      required: true
+      schema: { type: string }
+  responses:
+    BadRequest:
+      description: Invalid request
+    Unauthorized:
+      description: Missing or invalid token
+    Forbidden:
+      description: Authenticated but not authorized
