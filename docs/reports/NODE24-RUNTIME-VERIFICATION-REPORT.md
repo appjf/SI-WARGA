@@ -3,7 +3,8 @@
 - **Proyek:** Green Garden Residence – Integrated Community Management System (`GGR-ICMS`)
 - **Identitas Wilayah Resmi:** RT 06 RW 01, Perum Green Garden Residence, Desa Cipicung, Kecamatan Banyuresmi, Kabupaten Garut
 - **Tanggal Pemeriksaan:** 2026-11-15
-- **Status Keseluruhan:** `NOT VERIFIED` *(Repository & konfigurasi lokal siap [**PASS**], namun eksekusi GitHub Actions CI pada runner Node.js 24 belum dapat dijalankan karena remote GitHub & akses CI tidak tersedia)*
+- **Keputusan Tata Kelola:** `ACCEPTED WITH DOCUMENTED LIMITATION`
+- **Status Pengujian Node.js 24:** `NOT VERIFIED — GitHub Actions runner execution unavailable` *(Repository & konfigurasi lokal siap [**PASS**], namun eksekusi aktual GitHub Actions CI pada runner Node.js 24 belum diverifikasi; akan dijalankan segera setelah remote GitHub tersedia)*
 
 ---
 

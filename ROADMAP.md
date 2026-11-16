@@ -9,8 +9,8 @@ Dokumen ini merangkum tahapan pembangunan bertahap dengan sistem gerbang persetu
 | 0 | Analisis dokumen & perancangan struktur direktori | Disetujui | Persetujuan struktur & open items |
 | 1 | Inisialisasi repository, aplikasi, & CI dasar | Disetujui | Pipeline dasar & struktur terverifikasi |
 | 2 | Instalasi dependencies terkunci | Selesai (Diselaraskan) | Audit lisensi & kerentanan awal |
-| 2b | Standarisasi runtime resmi Node.js 24 LTS (`>=24.12.0 <25.0.0`) | Menunggu persetujuan akhir *(CI Node 24: `NOT VERIFIED`)* | Konfigurasi sinkron; CI Node 24 menunggu koneksi remote GitHub |
-| 3 | Setup Firebase (Auth, Firestore, Rules baseline) | Menunggu perintah | Project terpisah per environment & verifikasi CI Node 24 |
+| 2b | Standarisasi runtime resmi Node.js 24 LTS (`>=24.12.0 <25.0.0`) | Ditutup dengan catatan (`ACCEPTED WITH DOCUMENTED LIMITATION`) | Konfigurasi sinkron; CI Node 24: `NOT VERIFIED` (menunggu remote GitHub) |
+| 3 | Setup Firebase (Auth, Firestore, Rules baseline) | Belum dimulai (`NOT STARTED` / `NOT AUTHORIZED`) | Menunggu persetujuan eksplisit & validasi CI Node 24 |
 | 4 | Setup database (Firestore indexes & PostgreSQL/PostGIS) | Menunggu perintah | Skema & migrasi staging lulus |
 | 5 | Pengembangan backend (BFF, RBAC, audit, business logic) | Menunggu perintah | Uji isolasi data & idempotency lulus |
 | 6 | Pengembangan frontend (UI/UX warga & pengurus) | Menunggu perintah | Uji responsif & aksesibilitas lulus |
