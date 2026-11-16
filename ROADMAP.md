@@ -10,11 +10,11 @@ Dokumen ini merangkum tahapan pembangunan bertahap dengan sistem gerbang persetu
 | 1 | Inisialisasi repository, aplikasi, & CI dasar | Disetujui | Pipeline dasar & struktur terverifikasi |
 | 2 | Instalasi dependencies terkunci | Selesai (Diselaraskan) | Audit lisensi & kerentanan awal |
 | 2b | Standarisasi runtime resmi Node.js 24 LTS (`>=24.12.0 <25.0.0`) | Ditutup dengan catatan (`ACCEPTED WITH DOCUMENTED LIMITATION`) | Konfigurasi sinkron; CI Node 24: `NOT VERIFIED` (menunggu remote GitHub) |
-| 3 | Setup Firebase (Auth, Firestore, Rules baseline) | Belum dimulai (`NOT STARTED` / `NOT AUTHORIZED`) | Menunggu persetujuan eksplisit & validasi CI Node 24 |
-| 4 | Setup database (Firestore indexes & PostgreSQL/PostGIS) | Menunggu perintah | Skema & migrasi staging lulus |
-| 5 | Pengembangan backend (BFF, RBAC, audit, business logic) | Menunggu perintah | Uji isolasi data & idempotency lulus |
-| 6 | Pengembangan frontend (UI/UX warga & pengurus) | Menunggu perintah | Uji responsif & aksesibilitas lulus |
-| 7 | Integrasi GIS (FastAPI, PostGIS, Leaflet/MapLibre, Leafmap) | Menunggu perintah | GIS QA & persetujuan layer publik |
+| 3 | Setup Firebase (Auth, Firestore, Rules baseline) | Selesai (`COMPLETED / VERIFIED`) | Firebase client/admin SDK, RBAC matrix, Firestore rules & unit tests lulus |
+| 4 | Setup database (PostgreSQL, PostGIS & FastAPI GIS Service) | Selesai (`COMPLETED / VERIFIED`) | PostGIS schema, spatial indexing, FastAPI service & docs lulus |
+| 5 | Pengembangan backend (BFF, RBAC, audit, business logic) | Selesai (`COMPLETED / VERIFIED`) | Rute API Phase 5 & ekstensi BFF Phase 6 terverifikasi |
+| 6 | Pengembangan frontend (UI/UX warga & pengurus) | Selesai (`COMPLETED / VERIFIED`) | Seluruh WP-6A–WP-6J terintegrasi ke BFF, typecheck/lint/test/build lulus |
+| 7 | Integrasi GIS lanjutan (PostGIS live cluster, Leafmap & sinkronisasi multi-wilayah) | Siap dilanjutkan | UI & GIS BFF Phase 6 siap; tinggal menghubungkan instance PostGIS produksi |
 | 8 | Integrasi Google Drive (upload/download aman & rekonsiliasi) | Menunggu perintah | Uji otorisasi dokumen privat lulus |
 | 9 | Testing, security audit, backup/restore drill, & UAT | Menunggu perintah | Semua temuan kritis tertutup & UAT ditandatangani |
 | 10 | Deployment production & serah terima operasional | Menunggu perintah | Go-live checklist terpenuhi |
